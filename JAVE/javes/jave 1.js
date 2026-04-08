@@ -110,7 +110,11 @@ function exotic(){
 
 var algo = prompt("Ingrese algo (menos un número): ");
 
-if(algo == isNaN ){
+if(!isNaN(algo) || algo == null || algo == " " ){
+
+    console.log("carente de juicio");
+
+}else{
     if(algo === algo.toUpperCase()){
         document.writeln("Está escrito con mayúsculas");
     }else if(algo === algo.toLowerCase()){
@@ -118,8 +122,6 @@ if(algo == isNaN ){
     }else {
         document.writeln("Es una mescolanza")
     }
-}else if (algo !== null || algo !== " "){
-    console.log("carente de juicio");
 }
 
 }
