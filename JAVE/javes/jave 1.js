@@ -129,29 +129,85 @@ if(!isNaN(algo) || algo == null || algo == " " ){
 function palíndromo(){
 
     let texto = prompt("Ingresa un texto: ");
-    let str = texto.replaceAll(" ", " ").toLocaleLowerCase();
-    let arrStr = str.split("").reverse().join("");
 
-    if (str == arrStr){
+    if(!isNaN(texto) || texto == null || texto == " " ){
+        console.log("El valor ingresado no es válido")
+    }
+    else{
+    let str = texto.replaceAll(" ", "").toLocaleLowerCase();
+    let str2 = str.split("").reverse().join("");
+
+    if (str == str2){
         console.log("Es palíndromo");
     }
     else{
         console.log("No es palíndromo")
     }
-
+    }
 }
 
-function dado(params){
-    let arr = [0,0,0,0,0,0,0,0,0,0,0,0,0];
+function jerarquia(params){
 
-    for(var i = 0; i <= 3600; i++){
-        let dado1 = Math.floor(Math.random() * 6) + 1;
-        let dado2 = Math.floor(Math.random() * 6) + 1;
-        let Sumita = dado1 + dado2;
-        arr[Sumita] = arr[Sumita] + 1
+    let p1 = new Estudiante("Keke", 14, "Femenino", "Matemáticas", "2A")
+    console.log(p1.registrar());
+    p1.obtDetalles();
+
+    let p2 = new Profesor("Queque", 41, "Masculino", "Lengua y Literatura", "4B")
+    console.log(p2.asignar());
+    p2.obtDetalles();
+}
+
+    function Persona(nombre, edad, genero){
+        this.nombre = nombre;
+        this.edad = edad;
+        this.genero = genero;
     }
 
-    for(var i = 2; i <= 12; i++){
-        console.log("El numero ", i, "salió: ", arr[i], "veces");
+    Persona.prototype.obtDetalles = function(){
+        console.log(`Nombre: ${this.nombre}, Edad: ${this.edad}, Género: ${this.genero}`);
+    };
+
+    function Estudiante(nombre, edad, genero, curso, grupo){
+
+        Persona.call(this, nombre, edad, genero);
+        this.curso = curso;
+        this.grupo = grupo;
+    }
+
+    Estudiante.prototype = Object.create(Persona.prototype);
+    Estudiante.prototype.constructor = Estudiante;
+
+    Estudiante.prototype.registrar = function(){
+        console.log(`${this.nombre} ha sido registrado en el curso de ${this.curso}, grupo ${this.grupo}.`);
+    };
+
+    function Profesor(nombre, edad, genero, asignatura, nivel){
+
+        Persona.call(this, nombre, edad, genero);
+        this.asignatura = asignatura;
+        this.nivel = nivel;   
+    }
+
+    Profesor.prototype = Object.create(Persona.prototype);
+    Profesor.prototype.constructor = Profesor;
+
+    Profesor.prototype.asignar = function(){
+        console.log(`${this.nombre} ha sido asignado a la asignatura ${this.asignatura}, nivel ${this.nivel}.`);
+}
+
+
+function dado(params){
+
+    let arr = [0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+    for(let i = 0; i <= 3600; i++){
+        let dado1 = Math.floor(Math.random() * 6) + 1;
+        let dado2 = Math.floor(Math.random() * 6) + 1;
+        let SumaDD = dado1 + dado2;
+        arr[SumaDD] = arr[SumaDD] + 1;
+    }
+
+    for(let i = 2; i <= 12; i++){
+        console.log("El número ", i, "salió: ", arr[i], "veces");
     }
 }
